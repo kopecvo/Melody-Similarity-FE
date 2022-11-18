@@ -4,7 +4,7 @@
     <v-main>
       <v-card>
         <v-card-title>
-          Niggerfaggot
+          {{ store.count }}
         </v-card-title>
       </v-card>
     </v-main>
@@ -12,5 +12,7 @@
 </template>
 
 <script setup>
-  //
+    import { useStore } from '@/store/store'
+
+    const store = useStore()
 </script>
