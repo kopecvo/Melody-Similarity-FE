@@ -1,4 +1,11 @@
-# default
+# VMM frontend
+
+Melody similarity search web app for VMM semestral project, built with Vue3 and Vuetify
+
+
+### Requirements
+
+Node >= 16.0
 
 ## Project setup
 
