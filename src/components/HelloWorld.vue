@@ -1,13 +1,26 @@
 <template>
   <v-layout>
-    <v-app-bar color="grey-lighten-2"></v-app-bar>
     <v-main>
-      <NoteColumn />
-      <v-card>
-        <v-card-title>
-          {{ store.count }}
-        </v-card-title>
-      </v-card>
+      <div
+        class="keypad"
+      >
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+        <NoteColumn />
+      </div>
     </v-main>
   </v-layout>
 </template>
@@ -18,3 +31,9 @@
 
     const store = useStore()
 </script>
+
+<style scoped lang="sass">
+.keypad
+  display: flex
+  flex-direction: row
+</style>

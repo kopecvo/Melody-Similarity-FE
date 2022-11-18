@@ -1,5 +1,7 @@
 <template>
-  <v-app>
+  <v-app
+    style="background-color: #182126"
+  >
     <HelloWorld />
   </v-app>
 </template>
