@@ -1,16 +1,47 @@
 import { defineStore } from 'pinia'
 
 export const useStore = defineStore('store', {
-  state: () => ({
-    count: 0,
-    name: 'Eduardo'
-  }),
-  getters: {
-    doubleCount: (state) => state.count * 2,
-  },
-  actions: {
-    increment() {
-      this.count++
+
+    state: () => ({
+        // Maximum length of melody
+        melodyLength: 20,
+        // Inputted melody by the user
+        melody: [],
+        // Lowest and highest MIDI note available on the keypad
+        lowestNote: 48,     // C4
+        highestNote: 83,    // B6
+        // Array will be used to generate notes between lowest and highest one
+        notes: []
+    }),
+    getters: {
+        getNoteAtPosition: (state) => (position) => state.melody[position]
     },
-  },
+    actions: {
+        // Initialize melody input and range of notes available
+        initMelody() {
+            for (let i = this.lowestNote; i <= this.highestNote; ++i) {
+                this.notes.push(i)
+            }
+
+            for (let i = 0; i < this.melodyLength; ++i) {
+                // Push note outside of range => deselected note
+                this.melody.push(0)
+            }
+        },
+
+        changeNoteAtPosition(position, note) {
+            this.melody[position] = note
+        },
+
+        // Deselect all notes
+        resetMelody() {
+            for (let i = 0; i < this.melodyLength; ++i) {
+                this.melody[i] = 0
+            }
+        },
+
+        printMelody() {
+            console.log(this.melody)
+        }
+    },
 })
