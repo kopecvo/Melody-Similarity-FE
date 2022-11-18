@@ -5,32 +5,27 @@
     >
       <v-btn
         variant="tonal"
+        size="small"
         @click="store.resetMelody()"
       >
         Reset
       </v-btn>
       <v-btn
         variant="tonal"
+        size="small"
         @click="store.printMelody()"
       >
         Log melody
       </v-btn>
-      <div
-        class="keypad"
-      >
-        <NoteColumn
-          v-for="(note, i) in store.melodyLength"
-          :position-in-melody=i
-        />
-      </div>
+      <Sequencer />
     </v-main>
   </v-layout>
 </template>
 
 <script setup>
-    import NoteColumn from '@/components/NoteColumn'
     import { useStore } from '@/store/store'
     import {onBeforeMount} from "vue";
+    import Sequencer from '@/components/Sequencer'
 
     const store = useStore()
 
@@ -38,9 +33,3 @@
         store.initMelody()
     })
 </script>
-
-<style scoped lang="sass">
-.keypad
-  display: flex
-  flex-direction: row
-</style>
