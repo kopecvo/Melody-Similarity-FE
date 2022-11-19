@@ -50,14 +50,12 @@
     }
 
     let callbackId = null
-    let currentPosition = 0
-    let playing = false
 
     function play() {
-        if (!playing) {
+        if (!store.playing) {
             console.log("started playing")
-            currentPosition = 0
-            playing = true
+            store.playPosition = -1
+            store.playing = true
             callbackId = setInterval(playNote, 200)
         } else {
             stop()
@@ -67,15 +65,16 @@
     function stop() {
         console.log("finished playing")
         clearInterval(callbackId)
-        playing = false
+        store.playing = false
+        store.playPosition = -1
     }
 
     function playNote() {
-        if (currentPosition < store.melodyLength) {
-            if (store.melody[currentPosition] > 0)
-                synth.triggerAttackRelease(midiNoteToString(store.melody[currentPosition]), "8n");
-            console.log("playing note" + currentPosition)
-            currentPosition++
+        if (store.playPosition < store.melodyLength) {
+            store.playPosition++
+            if (store.melody[store.playPosition] > 0)
+                synth.triggerAttackRelease(midiNoteToString(store.melody[store.playPosition]), "8n");
+            // console.log("playing note" + store.playPosition)
         } else {
             stop()
         }

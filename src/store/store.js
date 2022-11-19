@@ -4,14 +4,18 @@ export const useStore = defineStore('store', {
 
     state: () => ({
         // Maximum length of melody
-        melodyLength: 20,
+        melodyLength: 40,
         // Inputted melody by the user
         melody: [],
         // Lowest and highest MIDI note available on the keypad
         lowestNote: 48,     // C4
         highestNote: 83,    // B6
         // Array will be used to generate notes between lowest and highest one
-        notes: []
+        notes: [],
+        // Is user melody playing or not
+        playing: false,
+        playPosition: -1,
+        synth: null
     }),
     getters: {
         getNoteAtPosition: (state) => (position) => state.melody[position]

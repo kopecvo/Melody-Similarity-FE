@@ -12,6 +12,8 @@
 <script setup>
 import {onBeforeMount, reactive, ref} from "vue";
 import {useStore} from "@/store/store";
+import * as Tone from "tone";
+import {midiNoteToString} from "@/util/util";
 
     const store = useStore()
 
@@ -19,17 +21,27 @@ import {useStore} from "@/store/store";
         positionInMelody: Number
     })
 
+    const synth = new Tone.Synth().toDestination();
+
     function determineColor(note) {
         if (note === store.getNoteAtPosition(props.positionInMelody)) {
+            if (store.playPosition === props.positionInMelody)
+                return 'noteBoxSelectedPlaying playing'
             return 'noteBoxSelected'
         }
         if (note % 2 === 0) {
+            if (store.playPosition === props.positionInMelody)
+                return 'noteBoxLightPlaying playing'
             return 'noteBoxLight'
         }
+        if (store.playPosition === props.positionInMelody)
+            return 'noteBoxDarkPlaying playing'
         return 'noteBoxDark'
     }
 
     function selectNote(note) {
+        // play note
+        synth.triggerAttackRelease(midiNoteToString(note), "8n");
         // If clicking the same note, deselect it instead
         if (note === store.getNoteAtPosition(props.positionInMelody)) {
             store.changeNoteAtPosition(props.positionInMelody, 0)
@@ -48,7 +60,7 @@ import {useStore} from "@/store/store";
   border-top: 1px solid #24343e
   transition: background-color 0.2s
 
-.noteBox:hover
+//.noteBox:hover
   background-color: #3e6364
 
 .noteBoxLight
@@ -57,10 +69,22 @@ import {useStore} from "@/store/store";
 .noteBoxDark
   background-color: #2e3e48
 
+.noteBoxLightPlaying
+  background-color: #3a656e
+
+.noteBoxDarkPlaying
+  background-color: #3a656e
+
 .noteBoxSelected
   background-color: #59c277
 
-.noteBoxSelected:hover
+.noteBoxSelectedPlaying
+  background-color: #dcea18
+
+//.noteBoxSelected:hover
   background-color: #59c277
 
+.playing
+  border-left: none
+  border-top: none
 </style>
