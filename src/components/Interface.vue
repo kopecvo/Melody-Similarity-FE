@@ -7,23 +7,34 @@
         variant="tonal"
         size="small"
         @click="store.resetMelody()"
+        v-if="false"
       >
         Reset
       </v-btn>
-      <v-btn
-        variant="tonal"
-        size="small"
-        @click="store.printMelody()"
-      >
-        Log melody
-      </v-btn>
 
       <v-btn
-        variant="tonal"
-        size="small"
+        variant="outlined"
+        icon
+        size="large"
         @click="play()"
       >
-        Play melody
+        <v-icon
+          v-if="store.playing"
+        >
+          mdi-stop
+        </v-icon>
+        <v-icon
+          v-else
+        >
+          mdi-play
+        </v-icon>
+      </v-btn>
+      <v-btn
+        variant="outlined"
+        icon
+        @click="store.resetMelody()"
+      >
+        <v-icon>mdi-trash-can-outline</v-icon>
       </v-btn>
       <Sequencer />
     </v-main>

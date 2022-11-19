@@ -40,12 +40,13 @@ import {midiNoteToString} from "@/util/util";
     }
 
     function selectNote(note) {
-        // play note
-        synth.triggerAttackRelease(midiNoteToString(note), "8n");
+
         // If clicking the same note, deselect it instead
         if (note === store.getNoteAtPosition(props.positionInMelody)) {
             store.changeNoteAtPosition(props.positionInMelody, 0)
         } else {
+            // play note
+            synth.triggerAttackRelease(midiNoteToString(note), "8n");
             store.changeNoteAtPosition(props.positionInMelody, note)
         }
     }
@@ -60,7 +61,7 @@ import {midiNoteToString} from "@/util/util";
   border-top: 1px solid #24343e
   //transition: background-color 0.2s
 
-//.noteBox:hover
+.noteBox:hover
   background-color: #3e6364
 
 .noteBoxLight
@@ -81,7 +82,7 @@ import {midiNoteToString} from "@/util/util";
 .noteBoxSelectedPlaying
   background-color: #dcea18
 
-//.noteBoxSelected:hover
+.noteBoxSelected:hover
   background-color: #59c277
 
 .playing

@@ -8,7 +8,7 @@ export const useStore = defineStore('store', {
         // Inputted melody by the user
         melody: [],
         // Lowest and highest MIDI note available on the keypad
-        lowestNote: 48,     // C4
+        lowestNote: 60,     // C4
         highestNote: 83,    // B6
         // Array will be used to generate notes between lowest and highest one
         notes: [],

@@ -44,6 +44,13 @@ import {midiNoteToString} from "@/util/util";
   box-shadow: -1px 0 0 rgba(255,255,255,0.8) inset,0 0 5px #ccc inset,0 0 3px rgba(0,0,0,0.2)
   background: linear-gradient(to bottom,#eee 0%,#fff 100%)
 
+.whiteKey:active
+  border-left: 1px solid #777
+  border-bottom: 1px solid #999
+  border-right: 1px solid #999
+  box-shadow: 2px 0 3px rgba(0,0,0,0.1) inset,-5px 5px 20px rgba(0,0,0,0.2) inset,0 0 3px rgba(0,0,0,0.2)
+  background: linear-gradient(to bottom,#fff 0%,#e9e9e9 100%)
+
 .blackKey
   height: 22px
   margin-top: -11px
