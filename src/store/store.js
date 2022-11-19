@@ -22,6 +22,7 @@ export const useStore = defineStore('store', {
             for (let i = this.lowestNote; i <= this.highestNote; ++i) {
                 this.notes.push(i)
             }
+            this.notes.reverse()
 
             for (let i = 0; i < this.melodyLength; ++i) {
                 // Push note outside of range => deselected note

@@ -60,4 +60,7 @@ import {useStore} from "@/store/store";
 .noteBoxSelected
   background-color: #59c277
 
+.noteBoxSelected:hover
+  background-color: #59c277
+
 </style>

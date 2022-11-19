@@ -9,8 +9,10 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "axios": "^1.1.3",
+    "midicube": "^0.6.1",
     "pinia": "^2.0.24",
     "roboto-fontface": "*",
+    "tone": "^14.7.77",
     "vue": "^3.2.38",
     "vuetify": "^3.0.0",
     "webfontloader": "^1.0.0"
