@@ -58,7 +58,7 @@ import {midiNoteToString} from "@/util/util";
   width: 40px
   border-left: 1px solid #24343e
   border-top: 1px solid #24343e
-  transition: background-color 0.2s
+  //transition: background-color 0.2s
 
 //.noteBox:hover
   background-color: #3e6364

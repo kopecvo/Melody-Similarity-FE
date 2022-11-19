@@ -2,6 +2,7 @@
   <div
     class="sequencer"
   >
+    <PianoColumn />
     <NoteColumn
       v-for="(note, i) in store.melodyLength"
       :position-in-melody=i
@@ -10,6 +11,7 @@
 </template>
 
 <script setup>
+    import PianoColumn from '@/components/PianoColumn'
     import NoteColumn from '@/components/NoteColumn'
     import {useStore} from "@/store/store";
 
