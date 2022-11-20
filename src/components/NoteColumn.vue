@@ -10,9 +10,7 @@
 </template>
 
 <script setup>
-import {onBeforeMount, reactive, ref} from "vue";
 import {useStore} from "@/store/store";
-import * as Tone from "tone";
 import {midiNoteToString} from "@/util/util";
 
     const store = useStore()
