@@ -37,7 +37,6 @@ import {midiNoteToString} from "@/util/util";
     }
 
     function selectNote(note) {
-
         // If clicking the same note, deselect it instead
         if (note === store.getNoteAtPosition(props.positionInMelody)) {
             store.changeNoteAtPosition(props.positionInMelody, 0)

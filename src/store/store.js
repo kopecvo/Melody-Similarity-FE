@@ -15,9 +15,13 @@ export const useStore = defineStore('store', {
         // Is user melody playing or not
         playing: false,
         playPosition: -1,
+        // Minimum amount of notes inputted by user to be allowed to search the melody
+        minMelodyLengthSearch: 3
     }),
     getters: {
-        getNoteAtPosition: (state) => (position) => state.melody[position]
+        getNoteAtPosition: (state) => (position) => state.melody[position],
+        // Get amount of valid notes in melody
+        getMelodyNotes: (state) => state.melody.filter(note => note > 0).length
     },
     actions: {
         // Initialize melody input and range of notes available

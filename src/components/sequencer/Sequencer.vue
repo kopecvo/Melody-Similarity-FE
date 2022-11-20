@@ -1,16 +1,18 @@
 <template>
-  <SequencerControls
-    :synth="props.synth"
-  />
-  <div
-    class="sequencer"
-  >
-    <PianoColumn />
-    <NoteColumn
-      v-for="(note, i) in store.melodyLength"
-      :position-in-melody=i
+  <div>
+    <SequencerControls
       :synth="props.synth"
     />
+    <div
+      class="sequencer"
+    >
+      <PianoColumn />
+      <NoteColumn
+        v-for="(note, i) in store.melodyLength"
+        :position-in-melody=i
+        :synth="props.synth"
+      />
+    </div>
   </div>
 </template>
 
@@ -31,4 +33,5 @@
 .sequencer
   display: flex
   flex-direction: row
+  overflow-x: auto
 </style>

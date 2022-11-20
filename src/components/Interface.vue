@@ -1,11 +1,12 @@
 <template>
   <v-layout>
     <v-main
-      style="background-color: #182126"
+      class="page"
     >
       <Sequencer
         :synth="synth"
       />
+      <Search />
     </v-main>
   </v-layout>
 </template>
@@ -14,9 +15,9 @@
     import { useStore } from '@/store/store'
     import {onBeforeMount, onMounted} from "vue"
     import Sequencer from '@/components/sequencer/Sequencer'
+    import Search from '@/components/Search'
     //import * as MIDI from 'midicube'
     import * as Tone from 'tone'
-    import {midiNoteToString} from '@/util/util'
 
     const store = useStore()
 
@@ -56,3 +57,9 @@
     onMounted(() => {
     })
 </script>
+
+<style scoped lang="sass">
+.page
+  background-color: #182126
+
+</style>
