@@ -6,6 +6,7 @@
     <NoteColumn
       v-for="(note, i) in store.melodyLength"
       :position-in-melody=i
+      :synth="props.synth"
     />
   </div>
 </template>
@@ -14,6 +15,10 @@
     import PianoColumn from '@/components/PianoColumn'
     import NoteColumn from '@/components/NoteColumn'
     import {useStore} from "@/store/store";
+
+    const props = defineProps({
+        synth: null
+    })
 
     const store = useStore()
 </script>

@@ -18,10 +18,9 @@ import {midiNoteToString} from "@/util/util";
     const store = useStore()
 
     const props = defineProps({
-        positionInMelody: Number
+        positionInMelody: Number,
+        synth: null
     })
-
-    const synth = new Tone.Synth().toDestination();
 
     function determineColor(note) {
         if (note === store.getNoteAtPosition(props.positionInMelody)) {
@@ -46,7 +45,7 @@ import {midiNoteToString} from "@/util/util";
             store.changeNoteAtPosition(props.positionInMelody, 0)
         } else {
             // play note
-            synth.triggerAttackRelease(midiNoteToString(note), "8n");
+            props.synth.triggerAttackRelease(midiNoteToString(note), "8n");
             store.changeNoteAtPosition(props.positionInMelody, note)
         }
     }

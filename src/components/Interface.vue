@@ -36,7 +36,9 @@
       >
         <v-icon>mdi-trash-can-outline</v-icon>
       </v-btn>
-      <Sequencer />
+      <Sequencer
+        :synth="synth"
+      />
     </v-main>
   </v-layout>
 </template>
@@ -51,14 +53,21 @@
 
     const store = useStore()
 
-    // create a synth and connect it to the main output (your speakers)
-    const synth = new Tone.Synth().toDestination();
-
-    function testTone() {
-        // play a middle 'C' for the duration of an 8th note
-        synth.triggerAttackRelease("C4", "8n");
-        console.log(midiNoteToString(60))
-    }
+    // Create a piano synth and connect it to the main output (your speakers)
+    // This synth also gets passed to other components as a prop, since it doesn't work when it's loaded
+    // with Pinia (probably something DOM related)
+    const synth = new Tone.Sampler({
+        urls: {
+            C4: "C4.mp3",
+            A4: "A4.mp3",
+            C5: "C5.mp3",
+            A5: "A5.mp3",
+            C6: "C6.mp3",
+            A6: "A6.mp3",
+        },
+        release: 1,
+        baseUrl: "https://tonejs.github.io/audio/salamander/",
+    }).toDestination();
 
     let callbackId = null
 
