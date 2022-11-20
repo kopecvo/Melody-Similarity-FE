@@ -1,4 +1,7 @@
 <template>
+  <SequencerControls
+    :synth="props.synth"
+  />
   <div
     class="sequencer"
   >
@@ -15,6 +18,7 @@
     import PianoColumn from '@/components/PianoColumn'
     import NoteColumn from '@/components/NoteColumn'
     import {useStore} from "@/store/store";
+    import SequencerControls from "@/components/SequencerControls";
 
     const props = defineProps({
         synth: null
