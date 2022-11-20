@@ -15,10 +15,10 @@
 </template>
 
 <script setup>
-    import PianoColumn from '@/components/PianoColumn'
-    import NoteColumn from '@/components/NoteColumn'
+    import PianoColumn from '@/components/sequencer/PianoColumn'
+    import NoteColumn from '@/components/sequencer/NoteColumn'
     import {useStore} from "@/store/store";
-    import SequencerControls from "@/components/SequencerControls";
+    import SequencerControls from "@/components/sequencer/SequencerControls";
 
     const props = defineProps({
         synth: null

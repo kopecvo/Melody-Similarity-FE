@@ -13,7 +13,7 @@
 <script setup>
     import { useStore } from '@/store/store'
     import {onBeforeMount, onMounted} from "vue"
-    import Sequencer from '@/components/Sequencer'
+    import Sequencer from '@/components/sequencer/Sequencer'
     //import * as MIDI from 'midicube'
     import * as Tone from 'tone'
     import {midiNoteToString} from '@/util/util'
