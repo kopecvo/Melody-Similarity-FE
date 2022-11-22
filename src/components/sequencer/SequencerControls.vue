@@ -24,14 +24,6 @@
     >
       <v-icon>mdi-trash-can-outline</v-icon>
     </v-btn>
-
-    <v-btn
-      variant="tonal"
-      size="small"
-      @click="store.showSettings = !store.showSettings"
-    >
-      Settings
-    </v-btn>
   </div>
 </template>
 

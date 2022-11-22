@@ -20,26 +20,35 @@
       </v-form>
 
     </div>
+
     <v-btn
       class="item"
-      size="large"
       color="success"
       variant="tonal"
-      :disabled="sequencerStore.getMelodyNotes < store.minMelodyLengthSearch"
-      @click="search"
+      :disabled="!uploadMidiValid"
+      @click="uploadAndSearch"
     >
-      Search
+      Search MIDI
     </v-btn>
 
     <v-btn
       class="item"
-      size="large"
       color="success"
       variant="tonal"
-      :disabled="!uploadMidiValid"
-      @click="upload"
+      :disabled="sequencerStore.getMelodyNotes < store.minMelodyLengthSearch || searching"
+      @click="search"
+      :loading="searching"
     >
-      Search MIDI
+      Search melody
+    </v-btn>
+
+    <v-btn
+      class="item"
+      variant="tonal"
+      size="small"
+      @click="store.showSettings = !store.showSettings"
+    >
+      Settings
     </v-btn>
   </div>
 </template>
@@ -48,7 +57,8 @@
     import {useSequencerStore} from "@/store/sequencerStore";
     import {useStore} from "@/store/store";
     import axios from "axios"
-    import {reactive, ref, watch} from "vue";
+    import {onMounted, reactive, ref, watch} from "vue";
+    import config from "@/config/config"
 
     const sequencerStore = useSequencerStore()
     const store = useStore()
@@ -61,37 +71,52 @@
         },
     ]
 
+    let searching = ref(false)
+
     function setFiles(e) {
         midiFiles = e.target.files
-        console.log("setting files")
     }
 
     function search() {
-        axios.post('http://127.0.0.1:8000/api/', {
+        store.searchResults = null
+        searching.value = true
+        axios.post(config.API_URL + "api/search/", {
             inputMelody: sequencerStore.getMelody
+        }).then(response => {
+            store.searchResults = response.data
+            console.log(sequencerStore.getMelody)
+        }).catch(error => {
+            store.searchResults = null
+            console.log(error)
+        }).finally(() => {
+            searching.value = false
         })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 
-    function upload() {
+    function uploadAndSearch() {
+        if (midiFiles.length === 0) {
+            return
+        }
+
         let formData = new FormData();
         formData.append("file", midiFiles[0]);
-        axios.post('http://127.0.0.1:8000/api/upload/', formData, {
+        axios.post(config.API_URL + 'api/upload/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then(response => console.log(response)).catch(error => console.log(error))
+        }).then(response => {
+            store.searchResults = response.data
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
+    const uploadMidiForm = ref(null)
 </script>
 
 <style scoped lang="sass">
 .search
+  margin-top: 5px
   display: flex
   flex-direction: row
 

@@ -7,7 +7,9 @@ export const useStore = defineStore('store', {
         showSettings: false,
 
         // Minimum amount of notes inputted by user to be allowed to search the melody
-        minMelodyLengthSearch: 3
+        minMelodyLengthSearch: 3,
+
+        searchResults: null
     }),
     getters: {
     },
