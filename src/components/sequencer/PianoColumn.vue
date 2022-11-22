@@ -3,17 +3,17 @@
     class="piano"
   >
     <div
-      v-for="note in store.notes"
+      v-for="note in sequencerStore.notes"
       :class="determinePianoKey(note)"
     />
   </div>
 </template>
 
 <script setup>
-import {useStore} from "@/store/store";
+import {useSequencerStore} from "@/store/sequencerStore";
 import {midiNoteToString} from "@/util/util";
 
-    const store = useStore()
+    const sequencerStore = useSequencerStore()
 
     function determinePianoKey(note) {
         let noteStr = midiNoteToString(note)

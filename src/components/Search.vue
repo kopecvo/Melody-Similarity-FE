@@ -3,7 +3,7 @@
     size="large"
     color="success"
     variant="tonal"
-    :disabled="store.getMelodyNotes < store.minMelodyLengthSearch"
+    :disabled="sequencerStore.getMelodyNotes < store.minMelodyLengthSearch"
   >
     Search
   </v-btn>
@@ -18,8 +18,10 @@
 </template>
 
 <script setup>
+    import {useSequencerStore} from "@/store/sequencerStore";
     import {useStore} from "@/store/store";
 
+    const sequencerStore = useSequencerStore()
     const store = useStore()
 </script>
 

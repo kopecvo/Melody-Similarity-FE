@@ -1,5 +1,13 @@
 <template>
   <v-layout>
+    <v-navigation-drawer
+      theme="dark"
+      permanent
+      location="right"
+      v-model="store.showSettings"
+    >
+      <SearchSettings />
+    </v-navigation-drawer>
     <v-main
       class="page"
     >
@@ -7,18 +15,23 @@
         :synth="synth"
       />
       <Search />
+      <Results />
     </v-main>
   </v-layout>
 </template>
 
 <script setup>
-    import { useStore } from '@/store/store'
-    import {onBeforeMount, onMounted} from "vue"
+    import { useSequencerStore } from '@/store/sequencerStore'
+    import {useStore} from "@/store/store";
+    import {onBeforeMount, onMounted, ref} from "vue"
     import Sequencer from '@/components/sequencer/Sequencer'
     import Search from '@/components/Search'
+    import Results from "@/components/results/Results";
+    import SearchSettings from "@/components/SearchSettings";
     //import * as MIDI from 'midicube'
     import * as Tone from 'tone'
 
+    const sequencerStore = useSequencerStore()
     const store = useStore()
 
     // Create a piano synth and connect it to the main output (your speakers)
@@ -51,7 +64,7 @@
     }*/
 
     onBeforeMount(() => {
-        store.initMelody()
+        sequencerStore.initMelody()
     })
 
     onMounted(() => {

@@ -8,7 +8,7 @@
     >
       <PianoColumn />
       <NoteColumn
-        v-for="(note, i) in store.melodyLength"
+        v-for="(note, i) in sequencerStore.melodyLength"
         :position-in-melody=i
         :synth="props.synth"
       />
@@ -19,14 +19,14 @@
 <script setup>
     import PianoColumn from '@/components/sequencer/PianoColumn'
     import NoteColumn from '@/components/sequencer/NoteColumn'
-    import {useStore} from "@/store/store";
+    import {useSequencerStore} from "@/store/sequencerStore";
     import SequencerControls from "@/components/sequencer/SequencerControls";
 
     const props = defineProps({
         synth: null
     })
 
-    const store = useStore()
+    const sequencerStore = useSequencerStore()
 </script>
 
 <style scoped lang="sass">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="note in store.notes"
+      v-for="note in sequencerStore.notes"
       class="noteBox"
       :class="determineColor(note)"
       @click="selectNote(note)"
@@ -10,10 +10,10 @@
 </template>
 
 <script setup>
-import {useStore} from "@/store/store";
+import {useSequencerStore} from "@/store/sequencerStore";
 import {midiNoteToString} from "@/util/util";
 
-    const store = useStore()
+    const sequencerStore = useSequencerStore()
 
     const props = defineProps({
         positionInMelody: Number,
@@ -21,29 +21,29 @@ import {midiNoteToString} from "@/util/util";
     })
 
     function determineColor(note) {
-        if (note === store.getNoteAtPosition(props.positionInMelody)) {
-            if (store.playPosition === props.positionInMelody)
+        if (note === sequencerStore.getNoteAtPosition(props.positionInMelody)) {
+            if (sequencerStore.playPosition === props.positionInMelody)
                 return 'noteBoxSelectedPlaying playing'
             return 'noteBoxSelected'
         }
         if (note % 2 === 0) {
-            if (store.playPosition === props.positionInMelody)
+            if (sequencerStore.playPosition === props.positionInMelody)
                 return 'noteBoxLightPlaying playing'
             return 'noteBoxLight'
         }
-        if (store.playPosition === props.positionInMelody)
+        if (sequencerStore.playPosition === props.positionInMelody)
             return 'noteBoxDarkPlaying playing'
         return 'noteBoxDark'
     }
 
     function selectNote(note) {
         // If clicking the same note, deselect it instead
-        if (note === store.getNoteAtPosition(props.positionInMelody)) {
-            store.changeNoteAtPosition(props.positionInMelody, 0)
+        if (note === sequencerStore.getNoteAtPosition(props.positionInMelody)) {
+            sequencerStore.changeNoteAtPosition(props.positionInMelody, 0)
         } else {
             // play note
             props.synth.triggerAttackRelease(midiNoteToString(note), "8n");
-            store.changeNoteAtPosition(props.positionInMelody, note)
+            sequencerStore.changeNoteAtPosition(props.positionInMelody, note)
         }
     }
 
