@@ -20,7 +20,9 @@ export const useSequencerStore = defineStore('sequencerStore', {
     getters: {
         getNoteAtPosition: (state) => (position) => state.melody[position],
         // Get amount of valid notes in melody
-        getMelodyNotes: (state) => state.melody.filter(note => note > 0).length
+        getMelodyNotes: (state) => state.melody.filter(note => note > 0).length,
+        // Get final melody to be searched
+        getMelody: (state) => state.melody.filter(note => note > 0)
     },
     actions: {
         // Initialize melody input and range of notes available
