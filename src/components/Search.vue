@@ -98,6 +98,7 @@
         midiFiles = e.target.files
     }
 
+    // Post melody from sequencerStore and show results
     function searchMelody() {
         store.searchResults = null
         searchingMelody.value = true
@@ -130,7 +131,12 @@
         }).then(response => {
             incomingMelody = response.data.melody
             sequencerStore.melody = incomingMelody
-            snackbarText.value = 'Successfully extracted melody from Midi file'
+
+            if ('error' in response.data) {
+                snackbarText.value = response.data['error']
+            } else {
+                snackbarText.value = 'Successfully extracted melody from Midi file'
+            }
             snackbar.value = true
             // console.log(incomingMelody)
 
