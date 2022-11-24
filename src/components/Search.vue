@@ -23,13 +23,13 @@
 
     <v-btn
       class="item"
-      color="success"
+      color="warning"
       variant="tonal"
-      :disabled="!uploadMidiValid || searchingMelody || searchingMidi"
-      @click="uploadAndSearch"
+      :disabled="!uploadMidiValid || searchingMidi"
+      @click="extractAndSetMelody"
       :loading="searchingMidi"
     >
-      Search MIDI
+      Upload MIDI
     </v-btn>
 
     <v-btn
@@ -101,7 +101,7 @@
     function searchMelody() {
         store.searchResults = null
         searchingMelody.value = true
-        axios.post(config.API_URL + "api/search/melody/", {
+        axios.post(config.API_URL + "api/search/", {
             inputMelody: sequencerStore.getMelody
         }).then(response => {
             store.searchResults = response.data
@@ -113,42 +113,33 @@
         })
     }
 
-    function uploadAndSearch() {
+    // Extract melody from Midi and set it as the sequencer melody
+    function extractAndSetMelody() {
         if (midiFiles.length === 0) {
             return
         }
 
-        store.searchResults = null
         searchingMidi.value = true
-        let incomingFileName = ""
+        let incomingMelody = []
         let formData = new FormData();
         formData.append("file", midiFiles[0]);
-        axios.post(config.API_URL + 'api/upload/', formData, {
+        axios.post(config.API_URL + 'api/extract/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(response => {
-            incomingFileName = response.data.filename
-            console.log(incomingFileName)
+            incomingMelody = response.data.melody
+            sequencerStore.melody = incomingMelody
+            snackbarText.value = 'Successfully extracted melody from Midi file'
+            snackbar.value = true
+            // console.log(incomingMelody)
 
-            axios.post(config.API_URL + 'api/search/midi/', {
-                requestedMidi: incomingFileName
-            }).then(response => {
-                store.searchResults = response.data
-            }).catch(error => {
-                store.searchResults = null
-
-                if ('error' in error.response.data) {
-                    snackbarText.value = error.response.data['error']
-                    snackbar.value = true
-                }
-
-            }).finally(() => {
-                searchingMidi.value = false
-            })
         }).catch(error => {
-            store.searchResults = null
-            console.log(error)
+            if ('error' in error.response.data) {
+                snackbarText.value = error.response.data['error']
+                snackbar.value = true
+            }
+        }).finally(() => {
             searchingMidi.value = false
         })
     }
