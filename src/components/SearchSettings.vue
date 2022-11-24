@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <div
+    class="searchSettings"
+  >
+    <v-btn
+      icon="mdi-close"
+      variant="flat"
+      @click="store.showSettings = !store.showSettings"
+    >
+
+    </v-btn>
     <h3>
       Search settings
     </h3>
@@ -7,8 +16,12 @@
 </template>
 
 <script setup>
+    import {useStore} from "@/store/store";
+
+    const store = useStore()
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+.searchSettings
+  margin: 10px
 </style>

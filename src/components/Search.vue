@@ -25,8 +25,9 @@
       class="item"
       color="success"
       variant="tonal"
-      :disabled="!uploadMidiValid"
+      :disabled="!uploadMidiValid || searchingMelody || searchingMidi"
       @click="uploadAndSearch"
+      :loading="searchingMidi"
     >
       Search MIDI
     </v-btn>
@@ -35,20 +36,20 @@
       class="item"
       color="success"
       variant="tonal"
-      :disabled="sequencerStore.getMelodyNotes < store.minMelodyLengthSearch || searching"
-      @click="search"
-      :loading="searching"
+      :disabled="sequencerStore.getMelodyNotes < store.minMelodyLengthSearch || searchingMelody || searchingMidi"
+      @click="searchMelody"
+      :loading="searchingMelody"
     >
       Search melody
     </v-btn>
 
     <v-btn
+      size="small"
+      icon="mdi-tune"
       class="item"
       variant="tonal"
-      size="small"
       @click="store.showSettings = !store.showSettings"
     >
-      Settings
     </v-btn>
   </div>
 </template>
@@ -71,25 +72,25 @@
         },
     ]
 
-    let searching = ref(false)
+    let searchingMelody = ref(false)
+    let searchingMidi = ref(false)
 
     function setFiles(e) {
         midiFiles = e.target.files
     }
 
-    function search() {
+    function searchMelody() {
         store.searchResults = null
-        searching.value = true
-        axios.post(config.API_URL + "api/search/", {
+        searchingMelody.value = true
+        axios.post(config.API_URL + "api/search/melody/", {
             inputMelody: sequencerStore.getMelody
         }).then(response => {
             store.searchResults = response.data
-            console.log(sequencerStore.getMelody)
         }).catch(error => {
             store.searchResults = null
             console.log(error)
         }).finally(() => {
-            searching.value = false
+            searchingMelody.value = false
         })
     }
 
@@ -98,6 +99,9 @@
             return
         }
 
+        store.searchResults = null
+        searchingMidi.value = true
+        let incomingFileName = ""
         let formData = new FormData();
         formData.append("file", midiFiles[0]);
         axios.post(config.API_URL + 'api/upload/', formData, {
@@ -105,9 +109,23 @@
                 'Content-Type': 'multipart/form-data'
             }
         }).then(response => {
-            store.searchResults = response.data
+            incomingFileName = response.data.filename
+            console.log(incomingFileName)
+
+            axios.post(config.API_URL + 'api/search/midi/', {
+                requestedMidi: incomingFileName
+            }).then(response => {
+                store.searchResults = response.data
+            }).catch(error => {
+                store.searchResults = null
+                console.log(error)
+            }).finally(() => {
+                searchingMidi.value = false
+            })
         }).catch(error => {
+            store.searchResults = null
             console.log(error)
+            searchingMidi.value = false
         })
     }
 
