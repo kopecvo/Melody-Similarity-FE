@@ -51,6 +51,22 @@
       @click="store.showSettings = !store.showSettings"
     >
     </v-btn>
+
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ snackbarText }}
+
+      <template v-slot:actions>
+        <v-btn
+          color="pink"
+          variant="text"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -74,6 +90,9 @@
 
     let searchingMelody = ref(false)
     let searchingMidi = ref(false)
+
+    let snackbar = ref(false)
+    let snackbarText = ref("")
 
     function setFiles(e) {
         midiFiles = e.target.files
@@ -118,7 +137,12 @@
                 store.searchResults = response.data
             }).catch(error => {
                 store.searchResults = null
-                console.log(error)
+
+                if ('error' in error.response.data) {
+                    snackbarText.value = error.response.data['error']
+                    snackbar.value = true
+                }
+
             }).finally(() => {
                 searchingMidi.value = false
             })
