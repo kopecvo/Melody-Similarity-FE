@@ -15,7 +15,9 @@
         :synth="synth"
       />
       <Search />
-      <Results />
+      <Results
+        :synth="synth"
+      />
     </v-main>
   </v-layout>
 </template>

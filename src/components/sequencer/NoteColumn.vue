@@ -12,7 +12,9 @@
 <script setup>
 import {useSequencerStore} from "@/store/sequencerStore";
 import {midiNoteToString} from "@/util/util";
+import {useStore} from "@/store/store";
 
+    const store = useStore()
     const sequencerStore = useSequencerStore()
 
     const props = defineProps({
@@ -22,16 +24,16 @@ import {midiNoteToString} from "@/util/util";
 
     function determineColor(note) {
         if (note === sequencerStore.getNoteAtPosition(props.positionInMelody)) {
-            if (sequencerStore.playPosition === props.positionInMelody)
+            if (store.playPosition === props.positionInMelody && store.sequencerPlaying)
                 return 'noteBoxSelectedPlaying playing'
             return 'noteBoxSelected'
         }
         if (note % 2 === 0) {
-            if (sequencerStore.playPosition === props.positionInMelody)
+            if (store.playPosition === props.positionInMelody && store.sequencerPlaying)
                 return 'noteBoxLightPlaying playing'
             return 'noteBoxLight'
         }
-        if (sequencerStore.playPosition === props.positionInMelody)
+        if (store.playPosition === props.positionInMelody && store.sequencerPlaying)
             return 'noteBoxDarkPlaying playing'
         return 'noteBoxDark'
     }

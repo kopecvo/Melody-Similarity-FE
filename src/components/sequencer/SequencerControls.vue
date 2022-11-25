@@ -7,7 +7,7 @@
       @click="play()"
     >
       <v-icon
-        v-if="sequencerStore.playing"
+        v-if="store.playing"
       >
         mdi-stop
       </v-icon>
@@ -39,31 +39,27 @@
     const sequencerStore = useSequencerStore()
     const store = useStore()
 
-    let callbackId = null
-
     function play() {
-        if (!sequencerStore.playing) {
+        if (!store.playing) {
             console.log("started playing")
-            sequencerStore.playPosition = -1
-            sequencerStore.playing = true
-            callbackId = setInterval(playNote, 200)
+            store.playPosition = -1
+            store.playing = true
+            store.sequencerPlaying = true
+            store.callbackId = setInterval(playNote, 200)
         } else {
             stop()
         }
     }
 
     function stop() {
-        console.log("finished playing")
-        clearInterval(callbackId)
-        sequencerStore.playing = false
-        sequencerStore.playPosition = -1
+        store.stopPlaying()
     }
 
     function playNote() {
-        if (sequencerStore.playPosition < sequencerStore.melodyLength) {
-            sequencerStore.playPosition++
-            if (sequencerStore.melody[sequencerStore.playPosition] > 0)
-                props.synth.triggerAttackRelease(midiNoteToString(sequencerStore.melody[sequencerStore.playPosition]), "8n");
+        if (store.playPosition < sequencerStore.melodyLength) {
+            store.playPosition++
+            if (sequencerStore.melody[store.playPosition] > 0)
+                props.synth.triggerAttackRelease(midiNoteToString(sequencerStore.melody[store.playPosition]), "8n");
             // console.log("playing note" + store.playPosition)
         } else {
             stop()

@@ -13,9 +13,6 @@ export const useSequencerStore = defineStore('sequencerStore', {
         highestNote: 83,    // B5
         // Array will be used to generate notes between lowest and highest one
         notes: [],
-        // Is user melody playing or not
-        playing: false,
-        playPosition: -1,
     }),
     getters: {
         getNoteAtPosition: (state) => (position) => state.melody[position],
@@ -48,9 +45,5 @@ export const useSequencerStore = defineStore('sequencerStore', {
                 this.melody[i] = 0
             }
         },
-
-        printMelody() {
-            console.log(this.melody)
-        }
     },
 })

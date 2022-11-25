@@ -5,6 +5,7 @@
     <Result
       v-for="result in results"
       :result="result"
+      :synth="props.synth"
     />
   </div>
 </template>
@@ -20,7 +21,11 @@
         if (store.searchResults === null) {
             return []
         }
-        return [store.searchResults]
+        return store.searchResults
+    })
+
+    const props = defineProps({
+        synth: null
     })
 
 </script>
@@ -29,5 +34,6 @@
 .results
   display: flex
   flex-direction: row
+  flex-wrap: wrap
 
 </style>

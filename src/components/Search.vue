@@ -103,9 +103,11 @@
         store.searchResults = null
         searchingMelody.value = true
         axios.post(config.API_URL + "api/search/", {
-            inputMelody: sequencerStore.getMelody
+            inputMelody: sequencerStore.getMelody,
+            searchFn: store.chosenSearchFn,
+            numOfResults: store.numOfResults
         }).then(response => {
-            store.searchResults = response.data
+            store.searchResults = response.data.results
         }).catch(error => {
             store.searchResults = null
             console.log(error)
