@@ -9,7 +9,9 @@
       {{ props.result.author }}
     </v-card-subtitle>
 
-    <v-card-text>
+    <v-card-text
+      v-if="store.searchFn === 'lcs'"
+    >
       <v-chip
         style="margin-bottom: 10px"
         :color="'hsl(' + countPercentage(props.result.lcs, props.result.segmentMelody) + ', 100%, 45%)'"
@@ -48,6 +50,12 @@
       <p/>
 
     </v-card-text>
+    <v-card-text
+      v-if="store.searchFn === 'dtw'"
+    >
+      {{ "DTW distance: " + props.result.dtwDistance }}
+    </v-card-text>
+
   </v-card>
 </template>
 

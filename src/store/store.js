@@ -11,6 +11,8 @@ export const useStore = defineStore('store', {
 
         // Search results will be saved here after search
         searchResults: null,
+        // Search function used in results
+        searchFn: null,
 
         // Chosen search function in settings
         chosenSearchFn: "lcs",

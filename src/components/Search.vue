@@ -107,6 +107,7 @@
             searchFn: store.chosenSearchFn,
             numOfResults: store.numOfResults
         }).then(response => {
+            store.searchFn = response.data.searchFn
             store.searchResults = response.data.results
         }).catch(error => {
             store.searchResults = null
