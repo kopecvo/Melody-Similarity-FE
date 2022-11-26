@@ -54,6 +54,27 @@
       v-if="store.searchFn === 'dtw'"
     >
       {{ "DTW distance: " + props.result.dtwDistance }}
+      <p/>
+      {{ "Segment: <" + props.result.segment[0] + ", " + props.result.segment[1] + ">" }}
+      <p/>
+      {{ "Segment melody: "}}
+      <span
+        v-for="(note, i) in props.result.segmentMelody"
+      >
+        {{ note + " " }}
+      </span>
+      <v-btn
+        style="margin-left: 5px"
+        variant="plain"
+        icon="mdi-play"
+        size="x-small"
+        @click="playSegment"
+      ></v-btn>
+
+      <v-img
+        width="500"
+        :src="config.API_URL + props.result.graphUrl"
+      ></v-img>
     </v-card-text>
 
   </v-card>
@@ -63,6 +84,7 @@
     import {ref} from "vue";
     import {useStore} from "@/store/store";
     import {midiNoteToString} from "@/util/util";
+    import config from "@/config/config";
 
     const store = useStore()
 
