@@ -1,6 +1,6 @@
-# VMM frontend
+# MIDI melody similarity frontend
 
-Melody similarity search web app for VMM semestral project, built with Vue3 and Vuetify
+Melody similarity search web app, built with Vue3 and Vuetify
 
 
 ### Requirements
