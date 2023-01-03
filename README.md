@@ -2,12 +2,21 @@
 
 Melody similarity search web app, built with Vue3 and Vuetify
 
+![](https://raw.githubusercontent.com/kopecvo/Melody-Similarity-BE/master/report/images/interface.png)
 
-### Requirements
+## Features
 
-Node >= 16.0
+* Input melody using a sequencer
+* Sequencer is fully reactive and customizable (range of notes, max length)
+* Play/pause inputted melody, clear melody
+* MIDI file import which extracts melody from MIDI files
+* Search your melody in musical pieces in database (~295 pieces from [piano-midi.de](http://www.piano-midi.de/))
+* Different search functions available (**LCS** - Longest Common Subsequence, **DTW** - Dynamic Time Warping)
+* For DTW, a graph of mapping of the two sequences is also shown in the results
 
 ## Project setup
+
+Node >= 16.0 required
 
 ```
 # yarn
@@ -15,9 +24,6 @@ yarn
 
 # npm
 npm install
-
-# pnpm
-pnpm install
 ```
 
 ### Compiles and hot-reloads for development
@@ -28,24 +34,4 @@ yarn dev
 
 # npm
 npm run dev
-
-# pnpm
-pnpm dev
 ```
-
-### Compiles and minifies for production
-
-```
-# yarn
-yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
