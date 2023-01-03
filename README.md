@@ -1,6 +1,6 @@
 # MIDI melody similarity frontend
 
-Melody similarity search web app, built with Vue3 and Vuetify
+Melody similarity search web app, built with Vue.js and Vuetify
 
 ![](https://raw.githubusercontent.com/kopecvo/Melody-Similarity-BE/master/report/images/interface.png)
 
@@ -13,6 +13,11 @@ Melody similarity search web app, built with Vue3 and Vuetify
 * Search your melody in musical pieces in database (~295 pieces from [piano-midi.de](http://www.piano-midi.de/))
 * Different search functions available (**LCS** - Longest Common Subsequence, **DTW** - Dynamic Time Warping)
 * For DTW, a graph of mapping of the two sequences is also shown in the results
+
+## Technology used
+* [Vue.js 3](https://vuejs.org/), [Vuetify 3.0.1](https://next.vuetifyjs.com/en/)
+* [Pinia](https://pinia.vuejs.org/) for global state management
+* [Tone.js](https://tonejs.github.io/) for playing music in browser
 
 ## Project setup
 
