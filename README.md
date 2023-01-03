@@ -11,7 +11,7 @@ Melody similarity search web app, built with Vue.js and Vuetify
 * Play/pause inputted melody, clear melody
 * MIDI file import which extracts melody from MIDI files
 * Search your melody in musical pieces in database (~295 pieces from [piano-midi.de](http://www.piano-midi.de/))
-* Different search functions available (**LCS** - Longest Common Subsequence, **DTW** - Dynamic Time Warping)
+* Different search functions available ([LCS](https://en.wikipedia.org/wiki/Longest_common_subsequence) - Longest Common Subsequence, [DTW](https://en.wikipedia.org/wiki/Dynamic_time_warping) - Dynamic Time Warping)
 * For DTW, a graph of mapping of the two sequences is also shown in the results
 
 ## Technology used
