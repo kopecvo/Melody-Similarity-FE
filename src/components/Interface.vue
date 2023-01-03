@@ -30,7 +30,6 @@
     import Search from '@/components/Search'
     import Results from "@/components/results/Results";
     import SearchSettings from "@/components/SearchSettings";
-    //import * as MIDI from 'midicube'
     import * as Tone from 'tone'
 
     const sequencerStore = useSequencerStore()
@@ -51,19 +50,6 @@
         release: 1,
         baseUrl: "https://tonejs.github.io/audio/salamander/",
     }).toDestination();
-
-    /*function loadMidi() {
-        MIDI.loadPlugin({
-            soundfontUrl: "https://gleitz.github.io/midi-js-soundfonts/FatBoy/",
-            instrument: "acoustic_grand_piano",
-            onerror: console.warn,
-            onsuccess: () => {
-                console.log("NIgga")
-                // MIDI.noteOn(0, 60, 0);
-            }
-        });
-        midiLoaded = true
-    }*/
 
     onBeforeMount(() => {
         sequencerStore.initMelody()
